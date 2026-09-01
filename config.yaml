@@ -1,0 +1,43 @@
+# EcoLoop AI Master Configuration File
+
+building:
+  name: "Honeywell HQ - Innovation Tower Zone 1"
+  floor_area_sqm: 1200.0
+  target_pmv_min: -0.5
+  target_pmv_max: 0.5
+  default_cooling_setpoint: 23.0  # Celsius
+  default_heating_setpoint: 20.0  # Celsius
+  default_fan_speed: 0.7          # 0.0 to 1.0
+  min_cooling_setpoint: 20.0
+  max_cooling_setpoint: 27.0
+  min_heating_setpoint: 16.0
+  max_heating_setpoint: 22.0
+
+grid:
+  electricity_price_peak: 0.28    # $/kWh during peak hours (14:00 - 20:00)
+  electricity_price_offpeak: 0.12 # $/kWh during off-peak hours
+  carbon_intensity_peak: 0.65     # kg CO2 / kWh
+  carbon_intensity_offpeak: 0.25  # kg CO2 / kWh
+
+optimization:
+  weights:
+    energy: 0.35
+    comfort: 0.35
+    cost: 0.15
+    carbon: 0.15
+
+llm:
+  provider: "openai"              # Supports openai, ollama, custom
+  model_name: "gpt-4o-mini"
+  temperature: 0.2
+  api_base_url: "https://api.openai.com/v1"
+
+simulation:
+  timesteps_per_hour: 4
+  duration_days: 7
+  epw_weather_file: "USA_CA_San.Francisco.Intl.AP.724940_TMY3.epw"
+  idf_building_file: "SmallOffice.idf"
+
+mcp:
+  host: "127.0.0.1"
+  port: 8000

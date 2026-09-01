@@ -1,0 +1,35 @@
+! EnergyPlus IDF Model File — Honeywell Innovation Tower SmallOffice Zone 1
+! Version 23.2.0
+
+Version, 23.2;
+
+Building,
+    Honeywell Headquarters - Innovation Tower Zone 1, ! Name
+    0.0,                                             ! North Axis {deg}
+    Suburbs,                                         ! Terrain
+    0.04,                                            ! Loads Convergence Tolerance Value {W}
+    0.4,                                             ! Temperature Convergence Tolerance Value {deltaC}
+    FullInteriorAndExterior,                         ! Solar Distribution
+    25,                                              ! Maximum Number of Warmup Days
+    6;                                               ! Minimum Number of Warmup Days
+
+Timestep, 4; ! 4 timesteps per hour (15-minute resolution)
+
+HeatBalanceAlgorithm, ConductionTransferFunction;
+
+SurfaceConvectionAlgorithm:Inside, TARP;
+SurfaceConvectionAlgorithm:Outside, DOE-2;
+
+Zone,
+    Perimeter_ZN_1,                          ! Name
+    0.0,                                     ! Direction of Relative North {deg}
+    0.0, 0.0, 0.0,                           ! X,Y,Z Origin {m}
+    1,                                       ! Type
+    1,                                       ! Multiplier
+    autocalculate,                           ! Ceiling Height {m}
+    1200.0;                                  ! Volume {m3} (1200 sqm zone)
+
+ThermostatSetpoint:DualSetpoint,
+    Office Dual Thermostat,                  ! Name
+    Office Cooling Schedule,                 ! Heating Setpoint Temperature Schedule Name
+    Office Heating Schedule;                 ! Cooling Setpoint Temperature Schedule Name

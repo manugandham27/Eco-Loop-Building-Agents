@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  ecoloop-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ecoloop_dashboard
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./ecoloop.db:/app/ecoloop.db
+      - ./config.yaml:/app/config.yaml
+    restart: always
+
+  ecoloop-headless:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ecoloop_headless
+    command: ["python", "run.py", "--mode", "run", "--steps", "96"]
+    volumes:
+      - ./ecoloop.db:/app/ecoloop.db
+      - ./config.yaml:/app/config.yaml
+    restart: on-failure
